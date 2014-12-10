@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  pool: 30
+  host: postgres
+  database: pirozhki_development
+  username: pirozhki
+  password: mysecretpassword
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 30
+  host: postgres
+  database: pirozhki_test
+  username: pirozhki
+  password: mysecretpassword
+
+production:
+  adapter: postgresql
+  pool: 30
+  encoding: unicode
+  database: pirozhki_production
+  username: pirozhki
+  password: mysecretpassword

@@ -1,0 +1,33 @@
+common: &default_settings
+  app_path:
+  instagram:
+    proxy:
+    request_delay: 0
+    client_id: REPLACE_ME
+    client_secret: REPLACE_ME
+  web:
+    username: admin
+    password:
+  export:
+    type: stdout
+  logging:
+    type: stdout
+
+test:
+  <<: *default_settings
+
+development:
+  <<: *default_settings
+
+production:
+  <<: *default_settings
+  app_path: /home/app/pirozhki/current
+  web:
+    username: admin
+    password: admin
+  export:
+    type: logstash_tcp
+    host: localhost
+    port: 5229
+  logging:
+    type: file

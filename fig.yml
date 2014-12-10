@@ -1,0 +1,36 @@
+postgres:
+  image: postgres:9.3
+  environment:
+    POSTGRES_USER: pirozhki
+    POSTGRES_PASSWORD: mysecretpassword
+  volumes_from:
+    - pirozhki_db_volume
+
+redis:
+  image: redis:2.8
+  command: redis-server --appendonly yes
+  volumes_from:
+    - pirozhki_db_volume
+
+web:
+  image: zubkonst/pirozhki:latest
+  command: puma -C config/sidekiq_web.rb
+  environment:
+    APP_ENV: production
+  ports:
+    - 3000:80
+  links:
+    - redis:redis
+  volumes:
+    - variables:/pirozhki/config/variables
+
+workers:
+  image: zubkonst/pirozhki:latest
+  command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
+  environment:
+    APP_ENV: production
+  links:
+    - postgres:postgres
+    - redis:redis
+  volumes:
+    - variables:/pirozhki/config/variables
