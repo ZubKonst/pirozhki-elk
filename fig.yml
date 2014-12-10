@@ -18,13 +18,13 @@ web:
   environment:
     APP_ENV: production
   ports:
-    - 3000:80
+    - 80:3000
   links:
     - redis:redis
   volumes:
     - variables:/pirozhki/config/variables
 
-workers:
+worker:
   image: zubkonst/pirozhki:latest
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:

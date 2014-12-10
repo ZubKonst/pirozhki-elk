@@ -18,32 +18,37 @@ docker create \
 
 ### Setup pirozhki database
 ```
-fig run -e APP_ENV=development --rm workers rake db:setup
+fig run [-e APP_ENV=development] --rm worker rake db:setup
 ```
 
 ### Run pirozhki tests
 ```
-fig run -e APP_ENV=test -e COVERAGE=true --rm workers rspec
+fig run -e APP_ENV=test -e COVERAGE=true --rm worker rspec
 ```
 
-### Run pirozhki (web + workers)
+### Run pirozhki (web + worker)
 ```
 fig up -d
 ```
 
-### Run pirozhki web
+### Scale pirozhki workers
 ```
-fig start redis web
-```
-
-### Stop pirozhki (web + workers)
-```
-fig stop web workers
+fig scale worker=2
 ```
 
 ### Run pirozhki console (irb)
 ```
-fig run -e APP_ENV=development --rm workers irb -r ./app.rb
+fig run -e APP_ENV=development --rm worker irb -r ./app.rb
+```
+
+### Start pirozhki web only
+```
+fig start redis web
+```
+
+### Stop pirozhki (web + worker)
+```
+fig stop web worker
 ```
 
 
