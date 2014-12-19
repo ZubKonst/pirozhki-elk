@@ -12,13 +12,25 @@ redis:
   volumes_from:
     - pirozhki_db_volume
 
+logstash:
+  image: pblittle/docker-logstash:0.10.0
+  ports:
+    - 9292:9292
+    - 9200:9200
+  links:
+    - redis:redis
+  volumes:
+    - variables/logstash.conf:/opt/logstash.conf
+  volumes_from:
+    - pirozhki_db_volume
+
 web:
   image: zubkonst/pirozhki:latest
   command: puma -C config/sidekiq_web.rb
   environment:
     APP_ENV: production
   ports:
-    - 80:3000
+    - 3000:3000
   links:
     - redis:redis
   volumes:
