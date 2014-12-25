@@ -12,17 +12,25 @@ redis:
   volumes_from:
     - pirozhki_db_volume
 
+elasticsearch:
+  image: dockerfile/elasticsearch
+  ports:
+    - 9200:9200
+  volumes_from:
+    - pirozhki_db_volume
+  volumes:
+    - config/elasticsearch.yml:/data/elasticsearch.yml
+  command: /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+
 logstash:
   image: pblittle/docker-logstash:0.10.0
   ports:
     - 9292:9292
-    - 9200:9200
   links:
     - redis:redis
+    - elasticsearch:elasticsearch
   volumes:
-    - variables/logstash.conf:/opt/logstash.conf
-  volumes_from:
-    - pirozhki_db_volume
+    - config/logstash.conf:/opt/logstash.conf
 
 web:
   image: zubkonst/pirozhki:latest

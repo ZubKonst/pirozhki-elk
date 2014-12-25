@@ -7,7 +7,7 @@ Pirozhki-docker
 ### Setup project
 - Copy all files from `variables/sample/` to `variables/` and fill with your data.
 
-### Build volume images (for redis and postgres)
+### Build volume images (for redis, postgres and elasticsearch)
 ```
 docker create \
   --name pirozhki_db_volume \
@@ -18,7 +18,8 @@ docker create \
 
 ### Setup pirozhki database
 ```
-fig run [-e APP_ENV=development] --rm worker rake db:setup
+fig run --rm worker rake db:setup
+fig run -e APP_ENV=development --rm worker rake db:setup
 ```
 
 ### Run pirozhki tests

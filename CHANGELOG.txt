@@ -1,3 +1,4 @@
+- Add standalone elasticsearch.
 - Add logstash.
 
 Pirozhki 0.1.0, 2014-12-09
