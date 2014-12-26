@@ -20,6 +20,7 @@ production:
   adapter: postgresql
   pool: 30
   encoding: unicode
+  host: postgres
   database: pirozhki_production
   username: pirozhki
   password: mysecretpassword
