@@ -1,3 +1,4 @@
+- Add default kibana template.
 - Add standalone elasticsearch.
 - Add logstash.
 

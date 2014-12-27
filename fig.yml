@@ -31,6 +31,7 @@ logstash:
     - elasticsearch:elasticsearch
   volumes:
     - config/logstash.conf:/opt/logstash.conf
+    - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json
 
 web:
   image: zubkonst/pirozhki:latest
