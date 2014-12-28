@@ -353,7 +353,7 @@
       "notice": false
     }
   ],
-  "editable": true,
+  "editable": false,
   "failover": false,
   "index": {
     "interval": "day",
