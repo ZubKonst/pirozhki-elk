@@ -4,7 +4,7 @@
     "query": {
       "list": {
         "0": {
-          "query": "post_content_type = image",
+          "query": "post_content_type: image",
           "alias": "",
           "color": "#7EB26D",
           "id": 0,
@@ -19,7 +19,7 @@
           "pin": false,
           "type": "lucene",
           "enable": true,
-          "query": "post_content_type = video"
+          "query": "post_content_type: video"
         }
       },
       "ids": [
@@ -49,13 +49,13 @@
     {
       "title": "Graph",
       "height": "350px",
-      "editable": true,
+      "editable": false,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
           "span": 12,
-          "editable": true,
+          "editable": false,
           "group": [
             "default"
           ],
@@ -134,79 +134,16 @@
       "notice": false
     },
     {
-      "title": "GeoLocation",
-      "height": "400px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "bettermap",
-          "loadingEditor": false,
-          "field": "location_long_lat",
-          "size": 1000,
-          "spyable": true,
-          "tooltip": "_id",
-          "queries": {
-            "mode": "all",
-            "ids": [
-              0,
-              1
-            ]
-          },
-          "title": "Location"
-        },
-        {
-          "error": false,
-          "span": 6,
-          "editable": true,
-          "type": "terms",
-          "loadingEditor": false,
-          "field": "location_name",
-          "exclude": [],
-          "missing": false,
-          "other": false,
-          "size": 12,
-          "order": "count",
-          "style": {
-            "font-size": "10pt"
-          },
-          "donut": false,
-          "tilt": false,
-          "labels": true,
-          "arrangement": "horizontal",
-          "chart": "table",
-          "counter_pos": "above",
-          "spyable": true,
-          "queries": {
-            "mode": "all",
-            "ids": [
-              0,
-              1
-            ]
-          },
-          "tmode": "terms",
-          "tstat": "total",
-          "valuefield": "",
-          "title": "Popular Locations"
-        }
-      ],
-      "notice": false
-    },
-    {
       "title": "Tags",
       "height": "400px",
-      "editable": true,
+      "editable": false,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
           "error": false,
           "span": 4,
-          "editable": true,
+          "editable": false,
           "type": "terms",
           "loadingEditor": false,
           "field": "post_tags",
@@ -240,7 +177,7 @@
         {
           "error": false,
           "span": 8,
-          "editable": true,
+          "editable": false,
           "type": "terms",
           "loadingEditor": false,
           "field": "post_tags",
@@ -275,16 +212,79 @@
       "notice": false
     },
     {
-      "title": "Filters",
+      "title": "GeoLocation",
       "height": "400px",
-      "editable": true,
+      "editable": false,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
           "error": false,
           "span": 6,
-          "editable": true,
+          "editable": false,
+          "type": "bettermap",
+          "loadingEditor": false,
+          "field": "location_long_lat",
+          "size": 1000,
+          "spyable": true,
+          "tooltip": "_id",
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0,
+              1
+            ]
+          },
+          "title": "Location"
+        },
+        {
+          "error": false,
+          "span": 6,
+          "editable": false,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "location_name",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 12,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "table",
+          "counter_pos": "above",
+          "spyable": true,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0,
+              1
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "Popular Locations"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Filters",
+      "height": "400px",
+      "editable": false,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 6,
+          "editable": false,
           "type": "terms",
           "loadingEditor": false,
           "field": "filter_name",
@@ -318,7 +318,7 @@
         {
           "error": false,
           "span": 6,
-          "editable": true,
+          "editable": false,
           "type": "terms",
           "loadingEditor": false,
           "field": "filter_name",
@@ -370,21 +370,13 @@
       "notice": false,
       "query": "*",
       "pinned": true,
-      "history": [
-        "post_content_type = video",
-        "post_content_type = image",
-        "*post_content_type = video",
-        "*post_content_type = videod",
-        "post_content_type == image",
-        "post_content_type == video",
-        "*"
-      ],
+      "history": [],
       "remember": 10,
       "enable": true
     },
     {
       "type": "filtering",
-      "collapse": true,
+      "collapse": false,
       "notice": false,
       "enable": true
     }
@@ -425,15 +417,15 @@
     }
   ],
   "loader": {
-    "save_gist": false,
-    "save_elasticsearch": true,
+    "save_gist": true,
+    "save_elasticsearch": false,
     "save_local": true,
-    "save_default": true,
-    "save_temp": true,
+    "save_default": false,
+    "save_temp": false,
     "save_temp_ttl_enable": true,
     "save_temp_ttl": "30d",
     "load_gist": true,
-    "load_elasticsearch": true,
+    "load_elasticsearch": false,
     "load_elasticsearch_size": 20,
     "load_local": true,
     "hide": false
