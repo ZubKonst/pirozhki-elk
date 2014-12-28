@@ -417,17 +417,17 @@
     }
   ],
   "loader": {
-    "save_gist": true,
+    "save_gist": false,
     "save_elasticsearch": false,
-    "save_local": true,
+    "save_local": false,
     "save_default": false,
     "save_temp": false,
     "save_temp_ttl_enable": true,
     "save_temp_ttl": "30d",
-    "load_gist": true,
+    "load_gist": false,
     "load_elasticsearch": false,
     "load_elasticsearch_size": 20,
-    "load_local": true,
+    "load_local": false,
     "hide": false
   },
   "refresh": false
