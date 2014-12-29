@@ -142,11 +142,11 @@ index.number_of_replicas: 0
 
 # Path to directory containing configuration (this file and logging.yml):
 
-path.conf: /data
+path.conf: /elasticsearch/config
 
 # Path to directory where to store index data allocated for this node.
 
-path.data: /data/elasticsearch/data
+path.data: /elasticsearch/data/data
 
 # Can optionally include more than one location, causing data to be striped across
 # the locations (a la RAID 0) on a file level, favouring locations with most free
@@ -156,15 +156,15 @@ path.data: /data/elasticsearch/data
 
 # Path to temporary files:
 
-path.work: /data/elasticsearch/work
+path.work: /elasticsearch/data/work
 
 # Path to log files:
 
-path.logs: /data/elasticsearch/log
+path.logs: /elasticsearch/data/log
 
 # Path to where plugins are installed:
 
-path.plugins: /data/elasticsearch/plugins
+path.plugins: /elasticsearch/data/plugins
 
 
 #################################### Plugin ###################################

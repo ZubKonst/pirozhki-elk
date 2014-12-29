@@ -12,6 +12,7 @@ Pirozhki-docker
 docker create \
   --name pirozhki_db_volume \
   --volume /var/lib/postgresql/data \
+  --volume /elasticsearch/data  \
   --volume /data  \
   ubuntu:14.04 true
 ```
@@ -39,7 +40,7 @@ fig scale worker=2
 
 ### Run pirozhki console (irb)
 ```
-fig run -e APP_ENV=development --rm worker irb -r ./app.rb
+fig run --rm worker irb -r ./app.rb
 ```
 
 ### Start pirozhki web only

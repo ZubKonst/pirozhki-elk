@@ -19,8 +19,8 @@ elasticsearch:
   volumes_from:
     - pirozhki_db_volume
   volumes:
-    - config/elasticsearch.yml:/data/elasticsearch.yml
-  command: /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+    - config/elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
+  command: /elasticsearch/bin/elasticsearch -Des.config=/elasticsearch/config/elasticsearch.yml
 
 logstash:
   image: pblittle/docker-logstash:0.10.0
@@ -55,3 +55,4 @@ worker:
     - redis:redis
   volumes:
     - variables:/pirozhki/config/variables
+
