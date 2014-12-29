@@ -14,36 +14,31 @@ redis:
 
 elasticsearch:
   image: dockerfile/elasticsearch
-  ports:
-    - 9200:9200
+  command: /elasticsearch/bin/elasticsearch -Des.config=/elasticsearch/config/elasticsearch.yml
   volumes_from:
     - pirozhki_db_volume
   volumes:
-    - config/elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
-  command: /elasticsearch/bin/elasticsearch -Des.config=/elasticsearch/config/elasticsearch.yml
+    - config/elasticsearch.yml:/elasticsearch/config/elasticsearch.yml:ro
 
 logstash:
   image: pblittle/docker-logstash:0.10.0
-  ports:
-    - 9292:9292
   links:
     - redis:redis
     - elasticsearch:elasticsearch
   volumes:
-    - config/logstash.conf:/opt/logstash.conf
-    - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json
+    - config/logstash.conf:/opt/logstash.conf:ro
+    - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
+    - config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
 
-web:
+sidekiqweb:
   image: zubkonst/pirozhki:latest
   command: puma -C config/sidekiq_web.rb
   environment:
     APP_ENV: production
-  ports:
-    - 3000:3000
   links:
     - redis:redis
   volumes:
-    - variables:/pirozhki/config/variables
+    - variables:/pirozhki/config/variables:ro
 
 worker:
   image: zubkonst/pirozhki:latest
@@ -54,5 +49,17 @@ worker:
     - postgres:postgres
     - redis:redis
   volumes:
-    - variables:/pirozhki/config/variables
+    - variables:/pirozhki/config/variables:ro
 
+nginx:
+  image: nginx:1.7.9
+  ports:
+    - 80:80
+    - 8080:8080
+    - 3000:3000
+  links:
+    - sidekiqweb
+    - logstash
+    - elasticsearch
+  volumes:
+    - config/nginx.conf:/etc/nginx/nginx.conf:ro

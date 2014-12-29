@@ -45,12 +45,12 @@ fig run --rm worker irb -r ./app.rb
 
 ### Start pirozhki web only
 ```
-fig start redis web
+fig up nginx
 ```
 
-### Stop pirozhki (web + worker)
+### Stop pirozhki worker
 ```
-fig stop web worker
+fig stop worker
 ```
 
 
