@@ -1,5 +1,6 @@
 postgres:
   image: postgres:9.3
+  restart: always
   environment:
     POSTGRES_USER: pirozhki
     POSTGRES_PASSWORD: mysecretpassword
@@ -8,12 +9,14 @@ postgres:
 
 redis:
   image: redis:2.8
+  restart: always
   command: redis-server --appendonly yes
   volumes_from:
     - pirozhki_db_volume
 
 elasticsearch:
   image: dockerfile/elasticsearch
+  restart: always
   command: /elasticsearch/bin/elasticsearch -Des.config=/elasticsearch/config/elasticsearch.yml
   volumes_from:
     - pirozhki_db_volume
@@ -22,6 +25,7 @@ elasticsearch:
 
 logstash:
   image: pblittle/docker-logstash:0.10.0
+  restart: always
   links:
     - redis:redis
     - elasticsearch:elasticsearch
@@ -32,6 +36,7 @@ logstash:
 
 sidekiqweb:
   image: zubkonst/pirozhki:latest
+  restart: always
   command: puma -C config/sidekiq_web.rb
   environment:
     APP_ENV: production
@@ -42,6 +47,7 @@ sidekiqweb:
 
 worker:
   image: zubkonst/pirozhki:latest
+  restart: always
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:
     APP_ENV: production
@@ -53,6 +59,7 @@ worker:
 
 nginx:
   image: nginx:1.7.9
+  restart: always
   ports:
     - 80:80
     - 8080:8080

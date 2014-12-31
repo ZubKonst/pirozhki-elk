@@ -2,6 +2,9 @@ Pirozhki-docker
 ========
 [Pirozhki](https://github.com/ZubKonst/pirozhki) is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks.
 
+##Requirements
+- Fig HEAD or 1.1.0.
+
 ##Usage:
 
 ### Setup project
