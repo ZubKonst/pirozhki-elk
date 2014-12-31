@@ -2,48 +2,58 @@ Pirozhki-docker
 ========
 [Pirozhki](https://github.com/ZubKonst/pirozhki) is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks.
 
+##Requirements
+- Fig HEAD or 1.1.0.
+
 ##Usage:
 
 ### Setup project
 - Copy all files from `variables/sample/` to `variables/` and fill with your data.
 
-### Build volume images (for redis and postgres)
+### Build volume images (for redis, postgres and elasticsearch)
 ```
 docker create \
   --name pirozhki_db_volume \
   --volume /var/lib/postgresql/data \
+  --volume /elasticsearch/data  \
   --volume /data  \
   ubuntu:14.04 true
 ```
 
 ### Setup pirozhki database
 ```
-fig run -e APP_ENV=development --rm workers rake db:setup
+fig run --rm worker rake db:setup
+fig run -e APP_ENV=development --rm worker rake db:setup
 ```
 
 ### Run pirozhki tests
 ```
-fig run -e APP_ENV=test -e COVERAGE=true --rm workers rspec
+fig run -e APP_ENV=test -e COVERAGE=true --rm worker rspec
 ```
 
-### Run pirozhki (web + workers)
+### Run pirozhki (web + worker)
 ```
 fig up -d
 ```
 
-### Run pirozhki web
+### Scale pirozhki workers
 ```
-fig start redis web
-```
-
-### Stop pirozhki (web + workers)
-```
-fig stop web workers
+fig scale worker=2
 ```
 
 ### Run pirozhki console (irb)
 ```
-fig run -e APP_ENV=development --rm workers irb -r ./app.rb
+fig run --rm worker irb -r ./app.rb
+```
+
+### Start pirozhki web only
+```
+fig up nginx
+```
+
+### Stop pirozhki worker
+```
+fig stop worker
 ```
 
 

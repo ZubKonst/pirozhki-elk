@@ -1,5 +1,6 @@
 postgres:
   image: postgres:9.3
+  restart: always
   environment:
     POSTGRES_USER: pirozhki
     POSTGRES_PASSWORD: mysecretpassword
@@ -8,24 +9,45 @@ postgres:
 
 redis:
   image: redis:2.8
+  restart: always
   command: redis-server --appendonly yes
   volumes_from:
     - pirozhki_db_volume
 
-web:
+elasticsearch:
+  image: dockerfile/elasticsearch
+  restart: always
+  command: /elasticsearch/bin/elasticsearch -Des.config=/elasticsearch/config/elasticsearch.yml
+  volumes_from:
+    - pirozhki_db_volume
+  volumes:
+    - config/elasticsearch.yml:/elasticsearch/config/elasticsearch.yml:ro
+
+logstash:
+  image: pblittle/docker-logstash:0.10.0
+  restart: always
+  links:
+    - redis:redis
+    - elasticsearch:elasticsearch
+  volumes:
+    - config/logstash.conf:/opt/logstash.conf:ro
+    - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
+    - config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
+
+sidekiqweb:
   image: zubkonst/pirozhki:latest
+  restart: always
   command: puma -C config/sidekiq_web.rb
   environment:
     APP_ENV: production
-  ports:
-    - 3000:80
   links:
     - redis:redis
   volumes:
-    - variables:/pirozhki/config/variables
+    - variables:/pirozhki/config/variables:ro
 
-workers:
+worker:
   image: zubkonst/pirozhki:latest
+  restart: always
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:
     APP_ENV: production
@@ -33,4 +55,18 @@ workers:
     - postgres:postgres
     - redis:redis
   volumes:
-    - variables:/pirozhki/config/variables
+    - variables:/pirozhki/config/variables:ro
+
+nginx:
+  image: nginx:1.7.9
+  restart: always
+  ports:
+    - 80:80
+    - 8080:8080
+    - 3000:3000
+  links:
+    - sidekiqweb
+    - logstash
+    - elasticsearch
+  volumes:
+    - config/nginx.conf:/etc/nginx/nginx.conf:ro
