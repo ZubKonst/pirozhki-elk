@@ -3,7 +3,7 @@ Pirozhki-docker
 [Pirozhki](https://github.com/ZubKonst/pirozhki) is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks.
 
 ##Requirements
-- Fig HEAD or 1.1.0.
+- Docker-compose v1.1.0 or greater.
 
 ##Usage:
 
@@ -20,40 +20,45 @@ docker create \
   ubuntu:14.04 true
 ```
 
+### Warm up database containers
+```
+docker-compose up -d redis postgres
+```
+
 ### Setup pirozhki database
 ```
-fig run --rm worker rake db:setup
-fig run -e APP_ENV=development --rm worker rake db:setup
+docker-compose run --rm worker rake db:setup
+docker-compose run -e APP_ENV=development --rm worker rake db:setup
 ```
 
 ### Run pirozhki tests
 ```
-fig run -e APP_ENV=test -e COVERAGE=true --rm worker rspec
+docker-compose run -e APP_ENV=test -e COVERAGE=true --rm worker rspec
 ```
 
 ### Run pirozhki (web + worker)
 ```
-fig up -d
+docker-compose up -d 
 ```
 
 ### Scale pirozhki workers
 ```
-fig scale worker=2
+docker-compose scale worker=2
 ```
 
 ### Run pirozhki console (irb)
 ```
-fig run --rm worker irb -r ./app.rb
+docker-compose run --rm worker irb -r ./app.rb
 ```
 
 ### Start pirozhki web only
 ```
-fig up nginx
+docker-compose up nginx
 ```
 
 ### Stop pirozhki worker
 ```
-fig stop worker
+docker-compose stop worker
 ```
 
 

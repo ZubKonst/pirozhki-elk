@@ -47,7 +47,7 @@ sidekiqweb:
 
 worker:
   image: zubkonst/pirozhki:latest
-  restart: always
+  restart: on-failure
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:
     APP_ENV: production
