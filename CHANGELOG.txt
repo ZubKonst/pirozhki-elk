@@ -1,4 +1,11 @@
-Pirozhki 0.2.0, 2014-12-30
+Pirozhki-docker 0.3.0, 2015-06-14
+--------------------------
+- Breaking changes: upgrade postgres, redis, nginx, elasticsearch images
+- Move data-only container to docker-compose.yml
+- Use elasticsearch `official` image
+- Rename fig to docker-compose
+
+Pirozhki-docker 0.2.0, 2014-12-30
 --------------------------
 - Change docker restart policy. (restart: always)
 - Add nginx.
@@ -6,6 +13,6 @@ Pirozhki 0.2.0, 2014-12-30
 - Add standalone elasticsearch.
 - Add logstash.
 
-Pirozhki 0.1.0, 2014-12-09
+Pirozhki-docker 0.1.0, 2014-12-09
 --------------------------
 - Initial release.
