@@ -356,8 +356,8 @@
   "editable": false,
   "failover": false,
   "index": {
-    "interval": "day",
-    "pattern": "[logstash-]YYYY.MM.DD",
+    "interval": "month",
+    "pattern": "[logstash-]YYYY.MM",
     "default": "NO_TIME_FILTER_OR_INDEX_PATTERN_NOT_MATCHED",
     "warm_fields": true
   },
