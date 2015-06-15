@@ -12,12 +12,7 @@ Pirozhki-docker
 
 ### Build volume images (for redis, postgres and elasticsearch)
 ```
-docker create \
-  --name pirozhki_db_volume \
-  --volume /var/lib/postgresql/data \
-  --volume /elasticsearch/data  \
-  --volume /data  \
-  ubuntu:14.04 true
+docker-compose up -d datacontainer
 ```
 
 ### Warm up database containers
@@ -28,11 +23,11 @@ docker-compose up -d redis postgres
 ### Setup pirozhki database
 ```
 docker-compose run --rm worker rake db:setup
-docker-compose run -e APP_ENV=development --rm worker rake db:setup
 ```
 
 ### Run pirozhki tests
 ```
+docker-compose run -e APP_ENV=test --rm worker rake db:setup
 docker-compose run -e APP_ENV=test -e COVERAGE=true --rm worker rspec
 ```
 

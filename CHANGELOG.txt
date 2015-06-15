@@ -1,3 +1,6 @@
+- Breaking changes: upgrade postgres, redis, nginx, elasticsearch images
+- Move data-only container to docker-compose.yml
+- Use elasticsearch `official` image
 - Rename fig to docker-compose
 
 Pirozhki 0.2.0, 2014-12-30
