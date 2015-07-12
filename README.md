@@ -1,6 +1,7 @@
-Pirozhki-docker
+Pirozhki-ELK
 ========
 [Pirozhki](https://github.com/ZubKonst/pirozhki) is a [sidekiq](http://sidekiq.org)-based utility for collecting data from social networks.
+[Pirozhki-ELK](https://github.com/ZubKonst/pirozhki-elk) is an example of running [Pirozhki](https://github.com/ZubKonst/pirozhki) integrated to ElasticSearch-LogStash-Kibana stack in a Dockerized environment.
 
 ##Requirements
 - Docker-compose v1.1.0 or greater.
