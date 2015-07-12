@@ -4,7 +4,7 @@
     "query": {
       "list": {
         "0": {
-          "query": "post_content_type: image",
+          "query": "content_type: image",
           "alias": "",
           "color": "#7EB26D",
           "id": 0,
@@ -19,7 +19,7 @@
           "pin": false,
           "type": "lucene",
           "enable": true,
-          "query": "post_content_type: video"
+          "query": "content_type: video"
         }
       },
       "ids": [
@@ -146,7 +146,7 @@
           "editable": false,
           "type": "terms",
           "loadingEditor": false,
-          "field": "post_tags",
+          "field": "tags",
           "exclude": [],
           "missing": false,
           "other": true,
@@ -180,7 +180,7 @@
           "editable": false,
           "type": "terms",
           "loadingEditor": false,
-          "field": "post_tags",
+          "field": "tags",
           "exclude": [],
           "missing": false,
           "other": false,
