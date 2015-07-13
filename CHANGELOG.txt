@@ -1,3 +1,5 @@
+Pirozhki-ELK 0.3.2, 2015-07-12
+--------------------------
 - Rename project from `Pirozhki-docker` to `Pirozhki-ELK`.
 - Remove `post_` prefix from logstash data.
 
