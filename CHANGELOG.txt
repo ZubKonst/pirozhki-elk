@@ -1,22 +1,27 @@
-Pirozhki-docker 0.3.1, 2015-06-14
+Pirozhki-ELK 0.3.2, 2015-07-12
 --------------------------
-- Change logstash index pattern from daily to monthly basis
+- Rename project from `Pirozhki-docker` to `Pirozhki-ELK`.
+- Remove `post_` prefix from logstash data.
 
-Pirozhki-docker 0.3.0, 2015-06-14
+Pirozhki-ELK 0.3.1, 2015-06-14
 --------------------------
-- Breaking changes: upgrade postgres, redis, nginx, elasticsearch images
-- Move data-only container to docker-compose.yml
-- Use elasticsearch `official` image
-- Rename fig to docker-compose
+- Change logstash index pattern from daily to monthly basis.
 
-Pirozhki-docker 0.2.0, 2014-12-30
+Pirozhki-ELK 0.3.0, 2015-06-14
 --------------------------
-- Change docker restart policy. (restart: always)
+- Breaking changes: upgrade postgres, redis, nginx, elasticsearch images.
+- Move data-only container to docker-compose.yml.
+- Use elasticsearch `official` image.
+- Rename fig to docker-compose.
+
+Pirozhki-ELK 0.2.0, 2014-12-30
+--------------------------
+- Change docker restart policy (restart: always).
 - Add nginx.
 - Add default kibana template.
 - Add standalone elasticsearch.
 - Add logstash.
 
-Pirozhki-docker 0.1.0, 2014-12-09
+Pirozhki-ELK 0.1.0, 2014-12-09
 --------------------------
 - Initial release.
