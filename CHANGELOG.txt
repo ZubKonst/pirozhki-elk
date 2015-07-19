@@ -1,3 +1,4 @@
+- Define Pirozhki version
 - Add newrelic and session_secret configs
 
 Pirozhki-ELK 0.3.2, 2015-07-12
