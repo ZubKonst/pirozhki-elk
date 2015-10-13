@@ -3,8 +3,8 @@ datacontainer:
   volumes:
     - /var/lib/postgresql/data
     - /usr/share/elasticsearch/data
-    - /dat
-  command: true
+    - /data
+  command: "true"
 
 postgres:
   image: postgres:9.4
@@ -18,9 +18,11 @@ postgres:
 redis:
   image: redis:3.0
   restart: always
-  command: redis-server --appendonly yes
+  command: redis-server /usr/local/etc/redis/redis.conf
   volumes_from:
     - datacontainer
+  volumes:
+    - config/redis.conf:/usr/local/etc/redis/redis.conf:ro
 
 elasticsearch:
   image: elasticsearch:1.6
@@ -34,33 +36,33 @@ logstash:
   image: pblittle/docker-logstash:0.10.0
   restart: always
   links:
-    - redis:redis
-    - elasticsearch:elasticsearch
+    - redis
+    - elasticsearch
   volumes:
     - config/logstash.conf:/opt/logstash.conf:ro
     - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
     - config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
 
 sidekiqweb:
-  image: zubkonst/pirozhki:0.5.1
+  image: zubkonst/pirozhki:0.5.2
   restart: always
   command: puma -C config/sidekiq_web.rb
   environment:
     APP_ENV: production
   links:
-    - redis:redis
+    - redis
   volumes:
     - variables:/pirozhki/config/variables:ro
 
 worker:
-  image: zubkonst/pirozhki:0.5.1
+  image: zubkonst/pirozhki:0.5.2
   restart: on-failure
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:
     APP_ENV: production
   links:
-    - postgres:postgres
-    - redis:redis
+    - postgres
+    - redis
   volumes:
     - variables:/pirozhki/config/variables:ro
 
