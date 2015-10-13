@@ -44,7 +44,7 @@ logstash:
     - config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
 
 sidekiqweb:
-  image: zubkonst/pirozhki:0.5.1.2
+  image: zubkonst/pirozhki:0.5.2
   restart: always
   command: puma -C config/sidekiq_web.rb
   environment:
@@ -55,7 +55,7 @@ sidekiqweb:
     - variables:/pirozhki/config/variables:ro
 
 worker:
-  image: zubkonst/pirozhki:0.5.1.2
+  image: zubkonst/pirozhki:0.5.2
   restart: on-failure
   command: sidekiq -r ./app.rb -C config/variables/sidekiq.yml
   environment:

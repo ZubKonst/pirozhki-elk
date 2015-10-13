@@ -1,3 +1,5 @@
+- Add rollbar support.
+
 Pirozhki-ELK 0.3.3, 2015-07-18
 --------------------------
 - Define Pirozhki version
