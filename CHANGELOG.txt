@@ -1,5 +1,5 @@
-- Specify url namespaces. Reroute all requests through port 80.
-- Add sidekiq_cron config
+- Specify url namespaces. Route all requests through port 80.
+- Add sidekiq_cron config.
 
 Pirozhki-ELK 0.3.4, 2015-10-12
 --------------------------
@@ -7,8 +7,8 @@ Pirozhki-ELK 0.3.4, 2015-10-12
 
 Pirozhki-ELK 0.3.3, 2015-07-18
 --------------------------
-- Define Pirozhki version
-- Add newrelic and session_secret configs
+- Define Pirozhki version.
+- Add newrelic and session_secret configs.
 
 Pirozhki-ELK 0.3.2, 2015-07-12
 --------------------------
