@@ -16,7 +16,7 @@ postgres:
     - datacontainer
 
 redis:
-  image: redis:3.0.4
+  image: redis:3.0.5
   restart: always
   command: redis-server /usr/local/etc/redis/redis.conf
   volumes_from:
@@ -67,7 +67,7 @@ worker:
     - variables:/pirozhki/config/variables:ro
 
 nginx:
-  image: nginx:1.9.5
+  image: nginx:1.9.7
   restart: always
   ports:
     - "80:80"
