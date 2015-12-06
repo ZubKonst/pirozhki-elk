@@ -1,3 +1,5 @@
+Pirozhki-ELK 0.3.5, 2015-12-06
+--------------------------
 - Specify url namespaces. Route all requests through port 80.
 - Add sidekiq_cron config.
 
