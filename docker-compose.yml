@@ -22,7 +22,7 @@ redis:
   volumes_from:
     - datacontainer
   volumes:
-    - config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
 
 elasticsearch:
   image: elasticsearch:1.6.2
@@ -30,7 +30,7 @@ elasticsearch:
   volumes_from:
     - datacontainer
   volumes:
-    - config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
 
 logstash:
   image: pblittle/docker-logstash:0.10.0
@@ -39,9 +39,9 @@ logstash:
     - redis
     - elasticsearch
   volumes:
-    - config/logstash.conf:/opt/logstash.conf:ro
-    - config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
-    - config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
+    - ./config/logstash.conf:/opt/logstash.conf:ro
+    - ./config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
+    - ./config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
 
 sidekiqweb:
   image: zubkonst/pirozhki:0.5.3.1
@@ -52,7 +52,7 @@ sidekiqweb:
   links:
     - redis
   volumes:
-    - variables:/pirozhki/config/variables:ro
+    - ./variables:/pirozhki/config/variables:ro
 
 worker:
   image: zubkonst/pirozhki:0.5.3.1
@@ -64,7 +64,7 @@ worker:
     - postgres
     - redis
   volumes:
-    - variables:/pirozhki/config/variables:ro
+    - ./variables:/pirozhki/config/variables:ro
 
 nginx:
   image: nginx:1.9.7
@@ -76,4 +76,4 @@ nginx:
     - logstash
     - elasticsearch
   volumes:
-    - config/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
