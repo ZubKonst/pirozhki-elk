@@ -16,7 +16,7 @@ postgres:
     - datacontainer
 
 redis:
-  image: redis:3.0.5
+  image: redis:3.0.4
   restart: always
   command: redis-server /usr/local/etc/redis/redis.conf
   volumes_from:
