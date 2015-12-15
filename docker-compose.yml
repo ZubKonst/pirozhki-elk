@@ -12,8 +12,11 @@ postgres:
   environment:
     POSTGRES_USER: pirozhki
     POSTGRES_PASSWORD: mysecretpassword
+    PGDATA: /var/lib/postgresql/data
   volumes_from:
     - datacontainer
+  volumes:
+    - ./config/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
 
 redis:
   image: redis:3.0.4
