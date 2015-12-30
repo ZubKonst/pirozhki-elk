@@ -156,15 +156,15 @@ path.data: /usr/share/elasticsearch/data
 
 # Path to temporary files:
 
-path.work: /elasticsearch/data/work
+#path.work: /elasticsearch/data/work
 
 # Path to log files:
 
-path.logs: /elasticsearch/data/log
+path.logs: /usr/share/elasticsearch/logs
 
 # Path to where plugins are installed:
 
-path.plugins: /elasticsearch/data/plugins
+path.plugins: /usr/share/elasticsearch/plugins
 
 
 #################################### Plugin ###################################
@@ -180,8 +180,8 @@ path.plugins: /elasticsearch/data/plugins
 # it _never_ swaps.
 #
 # Set this property to true to lock the memory:
-#
-#bootstrap.mlockall: true
+
+bootstrap.mlockall: true
 
 # Make sure that the ES_MIN_MEM and ES_MAX_MEM environment variables are set
 # to the same value, and that the machine has enough memory to allocate
@@ -208,20 +208,20 @@ path.plugins: /elasticsearch/data/plugins
 #network.publish_host: 192.168.0.1
 
 # Set both 'bind_host' and 'publish_host':
-#
-#network.host: 192.168.0.1
+
+network.host: 0.0.0.0
 
 # Set a custom port for the node to node communication (9300 by default):
-#
-#transport.tcp.port: 9300
+
+transport.tcp.port: 9300
 
 # Enable compression for all communication between nodes (disabled by default):
 #
 #transport.tcp.compress: true
 
 # Set a custom port to listen for HTTP traffic:
-#
-#http.port: 9200
+
+http.port: 9200
 
 # Set a custom allowed content length:
 #

@@ -29,23 +29,33 @@ redis:
     - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
 
 elasticsearch:
-  image: elasticsearch:1.6.2
+  image: elasticsearch:2.1.1
   restart: always
   volumes_from:
     - datacontainer
   volumes:
     - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    - ./config/elasticsearch-logging.yml:/usr/share/elasticsearch/config/logging.yml:ro
 
 logstash:
-  image: pblittle/docker-logstash:0.10.0
+  image: logstash:2.1.1
   restart: always
+  command: logstash -f /opt/logstash.conf
   links:
     - redis
     - elasticsearch
   volumes:
     - ./config/logstash.conf:/opt/logstash.conf:ro
-    - ./config/kibana.json:/opt/logstash/vendor/kibana/app/dashboards/default.json:ro
-    - ./config/kibana.js:/opt/logstash/vendor/kibana/config.js:ro
+
+kibana:
+  image: kibana:4.3.1
+  restart: always
+  links:
+    - elasticsearch
+  environment:
+    - CONFIG_PATH=/opt/kibana/config/kibana-pirozhki.yml
+  volumes:
+    - ./config/kibana.yml:/opt/kibana/config/kibana-pirozhki.yml:ro
 
 sidekiqweb:
   image: zubkonst/pirozhki:0.5.3.1
@@ -77,7 +87,6 @@ nginx:
     - "80:80"
   links:
     - sidekiqweb
-    - logstash
-    - elasticsearch
+    - kibana
   volumes:
     - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
